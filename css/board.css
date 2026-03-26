@@ -1,7 +1,7 @@
 /* Board Container */
 .board {
-  --tile-size: clamp(36px, 4.2vw, 100px);   /* was 62px cap */
-  --tile-gap: clamp(3px, 0.3vw, 6px);        /* was 5px cap */
+  --tile-size: clamp(36px, calc((100vw - 96px - 21 * clamp(3px, 0.3vw, 6px)) / 22), 100px);
+  --tile-gap: clamp(3px, 0.3vw, 6px);
   position: relative;
   background: #1A1A1A;
   border-radius: 16px;
@@ -11,6 +11,7 @@
     0 -4px 20px rgba(0, 0, 0, 0.1);
   overflow: hidden;
 }
+
 /* Tile Grid */
 .tile-grid {
   display: grid;
@@ -19,6 +20,7 @@
   gap: var(--tile-gap);
   justify-content: center;
 }
+
 /* Accent Squares — small stacked blocks in top corners */
 .accent-bar {
   position: absolute;
@@ -40,6 +42,7 @@
   border-radius: 2px;
   transition: background-color 0.5s ease;
 }
+
 /* Keyboard Shortcut Indicator */
 .keyboard-hint {
   position: absolute;
@@ -61,6 +64,7 @@
 .keyboard-hint:hover {
   background: rgba(255, 255, 255, 0.15);
 }
+
 /* Shortcuts Overlay */
 .shortcuts-overlay {
   display: none;
@@ -92,6 +96,7 @@
   font-size: 11px;
   margin-left: 16px;
 }
+
 /* Scroll indicator at bottom of board */
 .board::after {
   content: '';
