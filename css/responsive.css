@@ -127,5 +127,7 @@
 :fullscreen .board {
   border-radius: 0;
   box-shadow: none;
-  --tile-size: clamp(44px, 5.5vw, 100px);
+  --tile-size: clamp(44px, 9.5vh, 160px);
+  --tile-gap: clamp(3px, 0.5vh, 8px);
+  padding: 4vh 4vw;
 }
