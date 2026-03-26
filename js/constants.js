@@ -55,3 +55,18 @@ export const MESSAGES = [
     '',
     '',
     'MAKE IT SIMPLE',
+    'BUT SIGNIFICANT',
+    '- DON DRAPER',
+    '',
+    ''
+  ],
+  [
+    '',
+    '',
+    'HAVE NO FEAR OF',
+    'PERFECTION',
+    '- SALVADOR DALI',
+    '',
+    ''
+  ]
+];
