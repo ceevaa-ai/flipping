@@ -68,6 +68,7 @@ export class Board {
       <div><span>Previous</span><kbd>\u2190</kbd></div>
       <div><span>Fullscreen</span><kbd>F</kbd></div>
       <div><span>Mute</span><kbd>M</kbd></div>
+      <div><span>Random</span><kbd>R</kbd></div>
     `;
     this.boardEl.appendChild(overlay);
 

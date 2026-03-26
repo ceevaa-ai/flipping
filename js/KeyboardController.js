@@ -42,6 +42,13 @@ export class KeyboardController {
         }
         break;
 
+      case 'r':
+      case 'R':
+        e.preventDefault();
+        const randomOn = this.rotator.toggleRandom();
+        this._showToast(randomOn ? 'Random on' : 'Random off');
+        break;
+
       case 'Escape':
         if (document.fullscreenElement) {
           document.exitFullscreen();
