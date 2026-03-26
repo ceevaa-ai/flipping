@@ -7,72 +7,262 @@ export const TOTAL_TRANSITION = 3800;
 export const MESSAGE_INTERVAL = 4000;
 export const CHARSET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,-!?\'/: ';
 export const SCRAMBLE_COLORS = [
-  '#00AAFF', '#00FFCC', '#AA00FF',
-  '#FF2D00', '#FFCC00', '#FFFFFF'
+  '#FFFFFF', '#C8A951', '#6B2D8B',
+  '#F0D060', '#9B4DB0', '#E8E0C8'
 ];
 export const ACCENT_COLORS = [
-  '#00FF7F', '#FF4D00', '#AA00FF',
-  '#00AAFF', '#00FFCC'
+  '#FFFFFF', '#C8A951', '#6B2D8B',
+  '#F0D060', '#9B4DB0'
 ];
 export const MESSAGES = [
   [
     '',
+    'TO PLAY FOR MADRID',
     '',
+    'IS THE GREATEST',
     '',
-    'GOD IS IN',
-    'THE DETAILS .',
-    '- LUDWIG MIES',
+    'THING IN FOOTBALL',
     '',
-    ''
+    '- DI STEFANO'
   ],
   [
     '',
+    'REAL MADRID IS NOT',
     '',
+    'A CLUB. IT IS',
     '',
-    'STAY HUNGRY',
-    'STAY FOOLISH',
-    '- STEVE JOBS',
+    'A WAY OF LIFE',
     '',
-    ''
+    '- ZIDANE'
   ],
   [
     '',
+    'AT REAL MADRID',
     '',
+    'YOU HAVE TO WIN.',
     '',
-    'GOOD DESIGN IS',
-    'GOOD BUSINESS',
-    '- THOMAS WATSON',
+    'ALWAYS.',
     '',
-    ''
+    '- FLORENTINO'
   ],
   [
     '',
+    'THIS CLUB HAS A',
     '',
+    'MAGIC NO OTHER',
     '',
-    'LESS IS MORE',
+    'CLUB IN THE WORLD',
     '',
-    '- MIES VAN DER ROHE',
-    '',
-    ''
+    '- RAUL'
   ],
   [
     '',
+    'WINNING IS IN',
     '',
+    'REAL MADRIDS',
     '',
-    'MAKE IT SIMPLE',
-    'BUT SIGNIFICANT',
-    '- DON DRAPER',
+    'DNA.',
     '',
-    ''
+    '- SERGIO RAMOS'
   ],
   [
     '',
+    'THE BERNABEU',
+    '',
+    'NEVER GIVES UP.',
+    '',
+    'NEVER.',
+    '',
+    '- CASILLAS'
+  ],
+  [
+    '',
+    'PLAYING FOR MADRID',
+    '',
+    'MEANS PLAYING',
+    '',
+    'FOR THE BEST',
+    '',
+    '- R. NAZARIO'
+  ],
+  [
+    '',
+    'THIS SHIRT MAKES',
+    '',
+    'ME FEEL SOMETHING',
+    '',
+    'EXTRAORDINARY',
+    '',
+    '- MARCELO'
+  ],
+  [
+    '',
+    'REAL MADRID',
+    '',
+    'DOESN\'T REBUILD.',
+    '',
+    'IT RELOADS.',
+    '',
+    '- ANCELOTTI'
+  ],
+  [
+    '',
+    'THE WHITE SHIRT',
+    '',
+    'CARRIES THE',
+    '',
+    'WEIGHT OF HISTORY',
+    '',
+    '- HIERRO'
+  ],
+  [
+    '',
+    'REAL MADRID',
+    '',
+    'LIKE A FILM -',
+    '',
+    'ALWAYS DRAMATIC',
+    '',
+    '- MOURINHO'
+  ],
+  [
+    '',
+    'YOU NEVER COUNT',
+    '',
+    'REAL MADRID OUT.',
+    '',
+    'NEVER.',
+    '',
+    '- GUARDIOLA'
+  ],
+  [
+    '',
+    'A WINNING',
+    '',
+    'MENTALITY',
+    '',
+    'IMPOSSIBLE TO EXPLAIN',
+    '',
+    '- KLOPP'
+  ],
+  [
+    '',
+    'REAL MADRID',
+    '',
+    'DON\'T DIE.',
+    '',
+    'THEY JUST WAIT.',
+    '',
+    '- UNKNOWN'
+  ],
+  [
+    '',
+    'THE GREATEST CLUB',
+    '',
+    'IN THE HISTORY',
+    '',
+    'OF FOOTBALL',
+    '',
+    '- FIFA, 2000'
+  ],
+  [
+    '',
+    'CHAMPIONS AREN\'T',
+    '',
+    'MADE IN GYMS.',
     '',
     '',
-    'HAVE NO FEAR OF',
-    'PERFECTION',
-    '- SALVADOR DALI',
     '',
-    ''
+    '- MUHAMMAD ALI'
+  ],
+  [
+    '',
+    'NEVER GIVE UP.',
+    '',
+    'THAT IS THE',
+    '',
+    'SECRET OF SUCCESS',
+    '',
+    '- ZIDANE'
+  ],
+  [
+    '',
+    'PRESSURE IS',
+    '',
+    'A PRIVILEGE.',
+    '',
+    '',
+    '',
+    '- BILLIE JEAN KING'
+  ],
+  [
+    '',
+    'IT\'S NOT THE SIZE',
+    '',
+    'OF THE DOG',
+    '',
+    'IN THE FIGHT',
+    '',
+    '- MARK TWAIN'
+  ],
+  [
+    '',
+    'WIN OR LOSE,',
+    '',
+    'DO IT',
+    '',
+    'WITH CLASS.',
+    '',
+    '- UNKNOWN'
+  ],
+  [
+    '',
+    'HALA MADRID',
+    '',
+    'Y NADA MAS.',
+    '',
+    '',
+    '',
+    '- CLUB ANTHEM'
+  ],
+  [
+    '',
+    'WE DON\'T NEED',
+    '',
+    'LUCK. WE HAVE',
+    '',
+    'HISTORY.',
+    '',
+    '- UNKNOWN'
+  ],
+  [
+    '',
+    'IN MADRID,',
+    '',
+    'MIRACLES ARE',
+    '',
+    'EXPECTED.',
+    '',
+    '- UNKNOWN'
+  ],
+  [
+    '',
+    'THE BERNABEU IS',
+    '',
+    'THE CATHEDRAL',
+    '',
+    'OF FOOTBALL',
+    '',
+    '- PLATINI'
+  ],
+  [
+    '',
+    'TO WEAR WHITE',
+    '',
+    'IS TO CARRY',
+    '',
+    'A LEGACY.',
+    '',
+    '- UNKNOWN'
   ]
 ];
