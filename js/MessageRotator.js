@@ -10,6 +10,9 @@ export class MessageRotator {
   }
 
   start() {
+    // Shuffle messages on load
+    this._shuffle();
+
     // Show first message immediately
     this.next();
 
@@ -30,6 +33,8 @@ export class MessageRotator {
 
   next() {
     this.currentIndex = (this.currentIndex + 1) % this.messages.length;
+    // Re-shuffle at end of cycle without resetting index
+    if (this.currentIndex === 0) this._shuffleInPlace();
     this.board.displayMessage(this.messages[this.currentIndex]);
     this._resetAutoRotation();
   }
@@ -38,6 +43,23 @@ export class MessageRotator {
     this.currentIndex = (this.currentIndex - 1 + this.messages.length) % this.messages.length;
     this.board.displayMessage(this.messages[this.currentIndex]);
     this._resetAutoRotation();
+  }
+
+  _shuffle() {
+    // Fisher-Yates shuffle, reset index for fresh start
+    for (let i = this.messages.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [this.messages[i], this.messages[j]] = [this.messages[j], this.messages[i]];
+    }
+    this.currentIndex = -1;
+  }
+
+  _shuffleInPlace() {
+    // Fisher-Yates shuffle without touching currentIndex
+    for (let i = this.messages.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [this.messages[i], this.messages[j]] = [this.messages[j], this.messages[i]];
+    }
   }
 
   _resetAutoRotation() {
