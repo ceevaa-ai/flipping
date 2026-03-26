@@ -1,8 +1,7 @@
 /* Board Container */
 .board {
-  --tile-size: clamp(36px, 4.2vw, 62px);
-  --tile-gap: clamp(3px, 0.3vw, 5px);
-
+  --tile-size: clamp(36px, 4.2vw, 100px);   /* was 62px cap */
+  --tile-gap: clamp(3px, 0.3vw, 6px);        /* was 5px cap */
   position: relative;
   background: #1A1A1A;
   border-radius: 16px;
@@ -12,7 +11,6 @@
     0 -4px 20px rgba(0, 0, 0, 0.1);
   overflow: hidden;
 }
-
 /* Tile Grid */
 .tile-grid {
   display: grid;
@@ -21,7 +19,6 @@
   gap: var(--tile-gap);
   justify-content: center;
 }
-
 /* Accent Squares — small stacked blocks in top corners */
 .accent-bar {
   position: absolute;
@@ -31,22 +28,18 @@
   gap: 3px;
   z-index: 5;
 }
-
 .accent-bar-left {
   left: 18px;
 }
-
 .accent-bar-right {
   right: 18px;
 }
-
 .accent-segment {
   width: 14px;
   height: 14px;
   border-radius: 2px;
   transition: background-color 0.5s ease;
 }
-
 /* Keyboard Shortcut Indicator */
 .keyboard-hint {
   position: absolute;
@@ -65,11 +58,9 @@
   cursor: pointer;
   transition: background 0.2s;
 }
-
 .keyboard-hint:hover {
   background: rgba(255, 255, 255, 0.15);
 }
-
 /* Shortcuts Overlay */
 .shortcuts-overlay {
   display: none;
@@ -85,17 +76,14 @@
   z-index: 10;
   min-width: 180px;
 }
-
 .shortcuts-overlay.visible {
   display: block;
 }
-
 .shortcuts-overlay div {
   display: flex;
   justify-content: space-between;
   padding: 4px 0;
 }
-
 .shortcuts-overlay kbd {
   background: rgba(255, 255, 255, 0.1);
   padding: 1px 6px;
@@ -104,7 +92,6 @@
   font-size: 11px;
   margin-left: 16px;
 }
-
 /* Scroll indicator at bottom of board */
 .board::after {
   content: '';
