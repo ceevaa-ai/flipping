@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#111111">
+  <title>FlipOff Admin</title>
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+  <main class="admin-app">
+    <section class="login-shell" id="login-shell">
+      <section class="login-intro">
+        <p class="eyebrow">FlipOff Control</p>
+        <h1>Display admin, reorganized into a working dashboard.</h1>
+        <p class="lede">
+          Manage runtime messaging, screen presets, and display geometry from a single admin workspace.
+        </p>
+      </section>
+
+      <section class="login-card" id="login-panel">
+        <p class="section-kicker">Admin Login</p>
+        <form id="login-form" class="stack">
+          <label class="field">
+            <span>Password</span>
+            <input id="password" name="password" type="password" autocomplete="current-password" required>
+          </label>
+          <button type="submit" class="primary-btn">Unlock Admin</button>
+        </form>
+      </section>
+    </section>
+
+    <section class="dashboard-shell hidden" id="dashboard-shell">
+      <aside class="dashboard-sidebar">
+        <div class="sidebar-brand">
+          <p class="eyebrow">FlipOff Admin</p>
+          <h2>Control Desk</h2>
+          <p class="sidebar-copy">Navigate between admin pages without stacking every tool into one screen.</p>
+        </div>
+
+        <nav class="sidebar-nav" aria-label="Admin pages">
+          <button
+            type="button"
+            class="nav-link active"
+            data-page-target="home"
+            data-page-title="Home"
+            data-page-copy="A blank workspace reserved for the dashboard home."
+            aria-current="page"
+          >
+            <span class="nav-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" focusable="false">
+                <path d="M4 10.5L12 4l8 6.5" />
+                <path d="M6.5 9.5V20h11V9.5" />
+                <path d="M10 20v-5h4v5" />
+              </svg>
+            </span>
+            <span>Home</span>
+          </button>
+
+          <button
+            type="button"
+            class="nav-link"
+            data-page-target="send-message"
+            data-page-title="Send Message"
+            data-page-copy="Push a temporary override to the live display and clear it when you need the rotation back."
+          >
+            <span class="nav-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" focusable="false">
+                <path d="M21 4L10 15" />
+                <path d="M21 4L14 20l-4-5-5-4 16-7z" />
+              </svg>
+            </span>
+            <span>Send Message</span>
+          </button>
+
+          <button
+            type="button"
+            class="nav-link"
+            data-page-target="screens"
+            data-page-title="Screens"
+            data-page-copy="Edit the saved default message JSON that drives the fallback rotation."
+          >
+            <span class="nav-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" focusable="false">
+                <rect x="4" y="5" width="16" height="14" rx="2" />
+                <path d="M4 10h16" />
+                <path d="M9 10v9" />
+              </svg>
+            </span>
+            <span>Screens</span>
+          </button>
+
+          <button
+            type="button"
+            class="nav-link"
+            data-page-target="settings"
+            data-page-title="Settings"
+            data-page-copy="Adjust board geometry and API override duration for the live display."
+          >
+            <span class="nav-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" focusable="false">
+                <path d="M4 7h10" />
+                <path d="M4 17h16" />
+                <path d="M14 7h6" />
+                <path d="M4 12h16" />
+                <circle cx="11" cy="7" r="2.5" />
+                <circle cx="8" cy="12" r="2.5" />
+                <circle cx="16" cy="17" r="2.5" />
+              </svg>
+            </span>
+            <span>Settings</span>
+          </button>
+        </nav>
+      </aside>
+
+      <section class="dashboard-main">
+        <header class="workspace-header">
+          <div>
+            <p class="section-kicker">Admin Workspace</p>
+            <h1 id="workspace-title">Home</h1>
+            <p id="workspace-copy" class="workspace-copy">A blank workspace reserved for the dashboard home.</p>
+          </div>
+          <button type="button" id="logout-btn" class="ghost-btn">Log out</button>
+        </header>
+
+        <section class="workspace-page" data-page="home">
+          <div class="blank-stage" aria-hidden="true"></div>
+        </section>
+
+        <section class="workspace-page hidden" data-page="send-message">
+          <div class="page-panel">
+            <form id="message-form" class="stack">
+              <label class="field">
+                <span>Message</span>
+                <textarea id="remote-message" rows="5" spellcheck="false" placeholder="Server driven updates are live"></textarea>
+              </label>
+
+              <div class="action-row">
+                <button type="submit" class="primary-btn">Send Message</button>
+                <button type="button" id="clear-message-btn" class="ghost-btn">Clear Active Override</button>
+              </div>
+            </form>
+          </div>
+        </section>
+
+        <section class="workspace-page hidden" data-page="screens">
+          <div class="page-panel">
+            <form id="screens-form" class="stack">
+              <div class="screens-toolbar">
+                <div>
+                  <p class="section-kicker">Default Messages</p>
+                  <p class="helper-copy">Reorder the fallback messages, edit them in place, or add a new one with the modal.</p>
+                </div>
+                <button type="button" id="add-screen-btn" class="ghost-btn">Add Screen</button>
+              </div>
+
+              <p id="screens-draft-note" class="helper-copy hidden">You have unsaved screen changes.</p>
+
+              <div id="screens-list" class="screens-list" aria-live="polite"></div>
+
+              <div class="help-block">
+                <p>Each screen maps to one rotating fallback message. Drag cards to change rotation order before saving.</p>
+              </div>
+
+              <button type="submit" class="primary-btn">Save Screens</button>
+            </form>
+          </div>
+        </section>
+
+        <section class="workspace-page hidden" data-page="settings">
+          <div class="page-panel">
+            <form id="settings-form" class="stack">
+              <div class="grid">
+                <label class="field">
+                  <span>Columns</span>
+                  <input id="cols" name="cols" type="number" min="6" max="40" required>
+                </label>
+
+                <label class="field">
+                  <span>Rows</span>
+                  <input id="rows" name="rows" type="number" min="1" max="10" required>
+                </label>
+
+                <label class="field">
+                  <span>API message duration (seconds)</span>
+                  <input id="api-duration" name="api-duration" type="number" min="1" max="86400" required>
+                </label>
+              </div>
+
+              <p class="helper-copy">
+                Changes save to the server config immediately. If you tighten the board size, make sure your screen messages still fit within the new limits.
+              </p>
+
+              <button type="submit" class="primary-btn">Save Settings</button>
+            </form>
+          </div>
+        </section>
+
+        <p id="status-message" class="status-message" aria-live="polite"></p>
+      </section>
+    </section>
+  </main>
+
+  <dialog id="screen-modal" class="screen-modal">
+    <form method="dialog" id="screen-modal-form" class="screen-modal-card">
+      <div class="screen-modal-header">
+        <div>
+          <p class="section-kicker">Screen Editor</p>
+          <h2 id="screen-modal-title">Add Screen</h2>
+        </div>
+        <button type="button" id="close-screen-modal-btn" class="ghost-btn">Close</button>
+      </div>
+
+      <div id="screen-line-fields" class="screen-line-fields"></div>
+      <p class="helper-copy">Blank lines are allowed between populated lines, but at least one line must contain text.</p>
+
+      <div class="screen-modal-actions">
+        <button type="button" id="cancel-screen-modal-btn" class="ghost-btn">Cancel</button>
+        <button type="submit" class="primary-btn">Save Screen</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script type="module" src="js/admin.js"></script>
+</body>
+</html>

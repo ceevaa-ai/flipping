@@ -1,24 +1,22 @@
-import { MESSAGES, MESSAGE_INTERVAL, TOTAL_TRANSITION } from './constants.js';
+import { DEFAULT_MESSAGES, MESSAGE_INTERVAL, TOTAL_TRANSITION } from './constants.js';
 
 export class MessageRotator {
-  constructor(board) {
+  constructor(board, { messages = DEFAULT_MESSAGES } = {}) {
     this.board = board;
-    this.messages = MESSAGES;
+    this.messages = messages.map((message) => [...message]);
     this.currentIndex = -1;
     this._timer = null;
     this._paused = false;
+    this._remoteOverride = false;
   }
 
-  start() {
-    // Show first message immediately
-    this.next();
+  start({ immediate = true } = {}) {
+    if (immediate) {
+      this.next();
+    }
 
-    // Begin auto-rotation
-    this._timer = setInterval(() => {
-      if (!this._paused && !this.board.isTransitioning) {
-        this.next();
-      }
-    }, MESSAGE_INTERVAL + TOTAL_TRANSITION);
+    this._paused = false;
+    this._ensureTimer();
   }
 
   stop() {
@@ -28,27 +26,79 @@ export class MessageRotator {
     }
   }
 
-  next() {
+  next(options = {}) {
+    if (this._remoteOverride || this.messages.length === 0) return;
+
     this.currentIndex = (this.currentIndex + 1) % this.messages.length;
-    this.board.displayMessage(this.messages[this.currentIndex]);
+    this.board.displayMessage(this.messages[this.currentIndex], options);
     this._resetAutoRotation();
   }
 
-  prev() {
+  prev(options = {}) {
+    if (this._remoteOverride || this.messages.length === 0) return;
+
     this.currentIndex = (this.currentIndex - 1 + this.messages.length) % this.messages.length;
-    this.board.displayMessage(this.messages[this.currentIndex]);
+    this.board.displayMessage(this.messages[this.currentIndex], options);
     this._resetAutoRotation();
+  }
+
+  setMessages(messages) {
+    this.messages = Array.isArray(messages) ? messages.map((message) => [...message]) : [];
+    if (this.currentIndex >= this.messages.length) {
+      this.currentIndex = -1;
+    }
+  }
+
+  setBoard(board) {
+    this.board = board;
+  }
+
+  getCurrentMessage() {
+    if (this.currentIndex < 0 || this.currentIndex >= this.messages.length) {
+      return null;
+    }
+
+    return [...this.messages[this.currentIndex]];
+  }
+
+  hasStarted() {
+    return this._timer !== null || this.currentIndex !== -1;
+  }
+
+  enableRemoteOverride() {
+    this._remoteOverride = true;
+    this._paused = true;
+  }
+
+  disableRemoteOverride({ showNextMessage = true, interrupt = false } = {}) {
+    this._remoteOverride = false;
+    this._paused = false;
+    this._ensureTimer();
+
+    if (showNextMessage) {
+      this.next({ interrupt });
+      return;
+    }
+
+    this._resetAutoRotation();
+  }
+
+  _ensureTimer() {
+    if (this._timer) return;
+
+    this._timer = setInterval(() => {
+      if (!this._paused && !this.board.isTransitioning) {
+        this.next();
+      }
+    }, MESSAGE_INTERVAL + TOTAL_TRANSITION);
   }
 
   _resetAutoRotation() {
     // Reset timer when user manually navigates
     if (this._timer) {
       clearInterval(this._timer);
-      this._timer = setInterval(() => {
-        if (!this._paused && !this.board.isTransitioning) {
-          this.next();
-        }
-      }, MESSAGE_INTERVAL + TOTAL_TRANSITION);
+      this._timer = null;
+      this._ensureTimer();
     }
   }
 }
