@@ -46,6 +46,7 @@ export class MessageRotator {
   }
 
   jumpRandom() {
+    if (this.board.isTransitioning) return;
     let idx;
     do {
       idx = Math.floor(Math.random() * this.messages.length);
