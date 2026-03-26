@@ -2,15 +2,19 @@ import { Board } from './Board.js';
 import { SoundEngine } from './SoundEngine.js';
 import { MessageRotator } from './MessageRotator.js';
 import { KeyboardController } from './KeyboardController.js';
+import { PhoneMode } from './PhoneMode.js';
+import { TVMode } from './TVMode.js';
 
 document.addEventListener('DOMContentLoaded', () => {
+  const modeSelector  = document.getElementById('mode-selector');
+  const boardSection  = document.getElementById('board-section');
+  const phoneModeEl   = document.getElementById('phone-mode');
+  const tvOverlayEl   = document.getElementById('tv-overlay');
   const boardContainer = document.getElementById('board-container');
-  const soundEngine = new SoundEngine();
-  const board = new Board(boardContainer, soundEngine);
-  const rotator = new MessageRotator(board);
-  const keyboard = new KeyboardController(rotator, soundEngine);
+  const volumeBtn     = document.getElementById('volume-btn');
 
-  // Initialize audio on first user interaction (browser autoplay policy)
+  // ── Shared audio setup ──────────────────────────────────────────────
+  const soundEngine = new SoundEngine();
   let audioInitialized = false;
   const initAudio = async () => {
     if (audioInitialized) return;
@@ -23,11 +27,6 @@ document.addEventListener('DOMContentLoaded', () => {
   document.addEventListener('click', initAudio);
   document.addEventListener('keydown', initAudio);
 
-  // Start message rotation
-  rotator.start();
-
-  // Volume toggle button in header
-  const volumeBtn = document.getElementById('volume-btn');
   if (volumeBtn) {
     volumeBtn.addEventListener('click', () => {
       initAudio();
@@ -36,16 +35,28 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // "Get Early Access" button: scroll to board and go fullscreen
-  const ctaBtn = document.getElementById('cta-btn');
-  if (ctaBtn) {
-    ctaBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      initAudio();
-      boardContainer.scrollIntoView({ behavior: 'smooth' });
-      setTimeout(() => {
-        document.documentElement.requestFullscreen().catch(() => {});
-      }, 400);
-    });
-  }
+  // ── TV Mode ─────────────────────────────────────────────────────────
+  document.getElementById('btn-tv').addEventListener('click', () => {
+    modeSelector.classList.add('hidden');
+    boardSection.classList.remove('hidden');
+    tvOverlayEl.classList.remove('hidden');
+
+    const board = new Board(boardContainer, soundEngine);
+    // Keyboard controller works (fullscreen, mute) but no auto-rotation
+    const rotator = new MessageRotator(board);
+    new KeyboardController(rotator, soundEngine);
+    // Show the initial board with a blank display rather than auto-rotating
+    board.displayMessage(['', '', '', '', '']);
+
+    new TVMode(board, tvOverlayEl);
+  });
+
+  // ── Phone Mode ───────────────────────────────────────────────────────
+  document.getElementById('btn-phone').addEventListener('click', () => {
+    modeSelector.classList.add('hidden');
+    phoneModeEl.classList.remove('hidden');
+
+    const phone = new PhoneMode(phoneModeEl);
+    phone.init();
+  });
 });

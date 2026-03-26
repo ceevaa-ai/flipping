@@ -4,12 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#111111">
-  <title>FlipOff. — Free Split-Flap Display for Any TV</title>
+  <title>FlipOff. — Retro Split-Flap Display</title>
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/board.css">
   <link rel="stylesheet" href="css/tile.css">
   <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/modes.css">
 </head>
 <body>
 
@@ -18,8 +19,6 @@
     <header class="header">
       <div class="header-logo">FlipOff.</div>
       <nav class="header-nav">
-        <a href="#features">Features</a>
-        <a href="#pricing">Pricing</a>
         <button class="volume-icon" id="volume-btn" title="Toggle sound">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
@@ -30,18 +29,27 @@
       </nav>
     </header>
 
-    <!-- Hero -->
-    <section class="hero">
-      <h1>Turn any TV into a retro split-flap display.</h1>
-      <p class="subtitle">The classic flip-board look, without the $3,500 hardware.</p>
-      <div class="hero-cta">
-        <input type="email" placeholder="you@example.com">
-        <button id="cta-btn">Get Early Access</button>
+    <!-- Mode Selector -->
+    <section id="mode-selector">
+      <div class="mode-card" id="btn-tv">
+        <span class="mode-icon">📺</span>
+        <span class="mode-title">TV Mode</span>
+        <span class="mode-desc">Open on your TV. Enter the code from your phone to show the display.</span>
+      </div>
+      <div class="mode-card" id="btn-phone">
+        <span class="mode-icon">📱</span>
+        <span class="mode-title">Phone Mode</span>
+        <span class="mode-desc">Get a code and control what the TV displays — in real time.</span>
       </div>
     </section>
 
-    <!-- Board -->
-    <section class="board-section" id="board-container">
+    <!-- Phone Mode -->
+    <section id="phone-mode" class="hidden"></section>
+
+    <!-- TV / Board Mode -->
+    <section id="board-section" class="hidden">
+      <div class="board-section" id="board-container"></div>
+      <div id="tv-overlay" class="hidden"></div>
     </section>
   </div>
 
