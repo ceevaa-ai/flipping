@@ -45,8 +45,8 @@ export class KeyboardController {
       case 'r':
       case 'R':
         e.preventDefault();
-        this.rotator.jumpRandom();
-        this._showToast('Random');
+        const randomOn = this.rotator.toggleRandom();
+        this._showToast(randomOn ? 'Random on' : 'Random off');
         break;
 
       case 'Escape':

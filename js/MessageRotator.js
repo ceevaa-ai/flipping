@@ -7,6 +7,7 @@ export class MessageRotator {
     this.currentIndex = -1;
     this._timer = null;
     this._paused = false;
+    this.randomMode = false;
   }
 
   start() {
@@ -32,9 +33,16 @@ export class MessageRotator {
   }
 
   next() {
-    this.currentIndex = (this.currentIndex + 1) % this.messages.length;
-    // Re-shuffle at end of cycle without resetting index
-    if (this.currentIndex === 0) this._shuffleInPlace();
+    if (this.randomMode) {
+      let idx;
+      do {
+        idx = Math.floor(Math.random() * this.messages.length);
+      } while (idx === this.currentIndex && this.messages.length > 1);
+      this.currentIndex = idx;
+    } else {
+      this.currentIndex = (this.currentIndex + 1) % this.messages.length;
+      if (this.currentIndex === 0) this._shuffleInPlace();
+    }
     this.board.displayMessage(this.messages[this.currentIndex]);
     this._resetAutoRotation();
   }
@@ -45,15 +53,9 @@ export class MessageRotator {
     this._resetAutoRotation();
   }
 
-  jumpRandom() {
-    if (this.board.isTransitioning) return;
-    let idx;
-    do {
-      idx = Math.floor(Math.random() * this.messages.length);
-    } while (idx === this.currentIndex && this.messages.length > 1);
-    this.currentIndex = idx;
-    this.board.displayMessage(this.messages[this.currentIndex]);
-    this._resetAutoRotation();
+  toggleRandom() {
+    this.randomMode = !this.randomMode;
+    return this.randomMode;
   }
 
   _shuffle() {
