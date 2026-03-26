@@ -45,6 +45,16 @@ export class MessageRotator {
     this._resetAutoRotation();
   }
 
+  jumpRandom() {
+    let idx;
+    do {
+      idx = Math.floor(Math.random() * this.messages.length);
+    } while (idx === this.currentIndex && this.messages.length > 1);
+    this.currentIndex = idx;
+    this.board.displayMessage(this.messages[this.currentIndex]);
+    this._resetAutoRotation();
+  }
+
   _shuffle() {
     // Fisher-Yates shuffle, reset index for fresh start
     for (let i = this.messages.length - 1; i > 0; i--) {
